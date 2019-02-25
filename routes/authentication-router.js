@@ -4,6 +4,29 @@ const db = require('../database/dbConfig');
 
 const router = express.Router();
 
+const restricted = (req,res,next) => {
+    const {username, password} = req.headers;
+    db('users')
+        .where({username})
+        .first()
+        .then(user => {
+            console.log(user)
+            if (user && bcrypt.compareSync(password, user.password)) {
+                next();
+            } else {
+                res.status(401).json({ message: 'Invalid Credentials' });
+            }
+        })
+        .catch(error => {
+            res.status(500).json({
+                message:"Server could not authenticate",
+                error
+            });
+        });
+}
+
+router.use('/restricted', restricted)
+
 router.post('/register', (req, res) => {
     try {
         let user = req.body;
@@ -49,7 +72,7 @@ router.post('/login', (req, res) => {
 
 });
 
-router.get('/users', (req, res) => {
+router.get('/restricted/users', (req, res) => {
     db('users')
         .then(users => {
             res.status(200).json(users)
