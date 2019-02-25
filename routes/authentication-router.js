@@ -50,7 +50,16 @@ router.post('/login', (req, res) => {
 });
 
 router.get('/users', (req, res) => {
-    res.send('route works')
+    db('users')
+        .then(users => {
+            res.status(200).json(users)
+        })
+        .catch(error => {
+            res.send(500).json({
+                message: "Server could not get users",
+                error
+            })
+        })
 });
 
 module.exports = router;
