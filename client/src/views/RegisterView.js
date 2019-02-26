@@ -14,6 +14,7 @@ class RegisterView extends React.Component{
     handleRegisterChange = e => {
         this.setState({
             registerInfo: {
+                ...this.state.registerInfo,
                 [e.target.name]: e.target.value
             }
         })
@@ -21,7 +22,7 @@ class RegisterView extends React.Component{
 
     handleRegister = e => {
         e.preventDefault()
-        axios.post('https://localhost:5000/api/register', this.state.loginInfo)
+        axios.post('http://localhost:5000/api/register', this.state.registerInfo)
             .then(res => {
                 this.setState({
                     loggedIn: true,

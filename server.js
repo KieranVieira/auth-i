@@ -5,8 +5,8 @@ const AuthRouter = require('./routes/authentication-router');
 
 const server = express();
 
-server.use(express.json());
 server.use(helmet());
+server.use(express.json());
 server.use('/api/', AuthRouter)
 server.use(cors());
 

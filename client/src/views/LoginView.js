@@ -14,6 +14,7 @@ class LoginView extends React.Component{
     handleLoginChange = e => {
         this.setState({
             loginInfo: {
+                ...this.state.loginInfo,
                 [e.target.name]: e.target.value
             }
         })
@@ -21,7 +22,7 @@ class LoginView extends React.Component{
 
     handleLogin = e => {
         e.preventDefault()
-        axios.post('https://localhost:5000/api/login', this.state.loginInfo)
+        axios.post('http://localhost:5000/api/login', this.state.loginInfo)
             .then(res => {
                 this.setState({
                     loggedIn: true,
@@ -33,6 +34,7 @@ class LoginView extends React.Component{
                 this.props.history.push('/')
             })
             .catch(error => {
+                console.log('error happened')
                 console.log(error)
             })
     }

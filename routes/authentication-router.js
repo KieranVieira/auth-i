@@ -6,7 +6,6 @@ const KnexConnectSession = require('connect-session-knex')(session);
 
 const router = express.Router();
 
-
 const sessionConfig = {
     name: 'Session',
     secret: 'Some Secret',
