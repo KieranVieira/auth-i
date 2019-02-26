@@ -13,7 +13,7 @@ class App extends Component {
       <div className="App">
         <Route path='/register' component={RegisterView}/> 
         <Route path='/login' component={LoginView}/> 
-        <Route path='/' component={UserView}/> 
+        <Route path='/' exact component={UserView}/> 
       </div>
     );
   }

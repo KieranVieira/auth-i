@@ -20,7 +20,7 @@ class UserView extends React.Component{
     
     render(){
         return(
-            this.state.users ? 
+            this.state.users.length > 0 ? 
             this.state.users.map(user => {
                 return <h1>{user.username}</h1>
             }) :
